@@ -15,3 +15,15 @@
 .todo-card p {
     margin: 5px;
 }
+
+.on-hold {
+    background-color: lightyellow;
+}
+
+.in-progress {
+    background-color: lightblue;
+}
+
+.completed {
+    background-color: lightgreen;
+}

@@ -8,11 +8,14 @@ function TodoList({ todos, status }) {
       <div className="todo-list-status">
         {status}
       </div>
-      {todos.map((todo) => {
-        return (
-          <TodoCard name={todo.name} dueDate={todo.dueDate}></TodoCard>
-        );
-      })}
+      {todos.length > 0 ? (
+          todos.map((todo) => {
+          return (
+            <TodoCard name={todo.name} dueDate={todo.dueDate} status={todo.status}></TodoCard>
+          );
+        })) : (
+          <p className='p-empty'><i>Empty</i></p>
+        )}
     </div>
   )
 }
