@@ -1,5 +1,17 @@
 .todo-card {
     padding: 1.25em;
-    background-color: lightblue;
+    background-color: white;
     border-radius: 15px;
+    max-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #2a2a2a;
+    padding: 5px;
+    margin: 5px;
+}
+
+.todo-card p {
+    margin: 5px;
 }

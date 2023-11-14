@@ -2,12 +2,12 @@ import React from 'react'
 import { useState } from 'react'
 import './TodoCard.css'
 
-function TodoCard({name}) {
+function TodoCard({ name, dueDate }) {
 
   return (
     <div className='todo-card'>
       <h2>{name}</h2>
-      <button>Clique</button>
+      <p>{dueDate}</p>
     </div>
   )
 }
