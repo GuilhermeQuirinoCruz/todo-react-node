@@ -31,8 +31,8 @@ router.route('/')
       .add({
         "name": data.name,
         "dueDate": data.dueDate,
-        // status: in-progress, on-hold, completed
-        "status": "in-progress"
+        // status: In Progress, On Hold, Completed
+        "status": "In Progress"
       })
       .then((todo) => {
         res.json({'id' : todo.id});
