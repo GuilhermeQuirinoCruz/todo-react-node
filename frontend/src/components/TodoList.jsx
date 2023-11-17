@@ -11,7 +11,7 @@ function TodoList({ todos, status }) {
       {todos.length > 0 ? (
           todos.map((todo) => {
           return (
-            <TodoCard name={todo.name} dueDate={todo.dueDate} status={todo.status}></TodoCard>
+            <TodoCard name={todo.name} dueDate={todo.dueDate} status={todo.status} key={todo}></TodoCard>
           );
         })) : (
           <p className='p-empty'><i>Empty</i></p>

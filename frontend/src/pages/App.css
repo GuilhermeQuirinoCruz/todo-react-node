@@ -26,3 +26,24 @@
   justify-content: space-evenly;
   gap: 15px;
 }
+
+.new-todo {
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn-show-new-todo {
+  font-size: large;
+  background-color: lightgreen;
+  margin-bottom: 1em;
+}
+
+.show-new-todo {
+  height: auto;
+}
+
+.hide-new-todo {
+  height: 0;
+}

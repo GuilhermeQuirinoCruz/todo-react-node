@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import './App.css'
 import TodoList from '../components/TodoList'
 import axios from 'axios'
@@ -40,11 +40,69 @@ function App() {
   const todosOnHold = todos.filter((todo) => { return todo.status == 'On Hold' })
   const todosCompleted = todos.filter((todo) => { return todo.status == 'Completed' })
 
+  const [newTodo, setNewTodo] = useState(false);
+
+  function showNewTodo() {
+    setNewTodo(true);
+  }
+
+  function hideNewTodo() {
+    setNewTodo(false);
+  }
+
+  const todoNameRef = useRef('');
+  const todoDueDateRef = useRef('');
+
+  async function createNewTodo() {
+    console.log('creating new todo...');
+
+    console.log(todoNameRef.current.value);
+    console.log(todoDueDateRef.current.value);
+    
+    axios
+      .post('http://localhost:3000/todos', {
+        name: todoNameRef.current.value,
+        dueDate: todoDueDateRef.current.value
+      })
+      .then((response) => {
+        console.log('new todo created successfully');
+
+        todoNameRef.current.value = ''
+
+        fetchTodos();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <>
       <h1>Todo App</h1>
-      <input type="button" value="Teste" onClick={fetchTodos} />
-      <div className="todo-list-container">
+
+      {newTodo ? (
+        <div className={'new-todo'}>
+          <input type='button' value='X' onClick={hideNewTodo}/>
+
+          <div>
+            <p>
+              Name: <input type='text' name='todoName' id='todoName' ref={todoNameRef} />
+            </p>
+          </div>
+
+          <div>
+            <p>
+              Due Date: <input type='date' name='todoDueDate' id='todoDueDate' ref={todoDueDateRef} />
+            </p>
+          </div>
+
+          <input type='button' value='Create' onClick={createNewTodo}/>
+        </div>
+      ) : (
+        <input type='button' value='NEW +' onClick={showNewTodo} className='btn-show-new-todo'/>
+      )}
+
+      <div className='todo-list-container'>
         <TodoList todos={todosOnHold} status='On Hold'></TodoList>
         <TodoList todos={todosInProgress} status='In Progress'></TodoList>
         <TodoList todos={todosCompleted} status='Completed'></TodoList>
