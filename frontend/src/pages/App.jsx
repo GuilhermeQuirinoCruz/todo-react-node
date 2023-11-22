@@ -56,16 +56,15 @@ function App() {
   async function createNewTodo() {
     console.log('creating new todo...');
 
-    console.log(todoNameRef.current.value);
-    console.log(todoDueDateRef.current.value);
+    const todo = {
+      name: todoNameRef.current.value,
+      dueDate: todoDueDateRef.current.value
+    }
     
     axios
-      .post('http://localhost:3000/todos', {
-        name: todoNameRef.current.value,
-        dueDate: todoDueDateRef.current.value
-      })
+      .post('http://localhost:3000/todos', todo)
       .then((response) => {
-        console.log('new todo created successfully');
+        console.log(`new todo with id ${response.id} created successfully`);
 
         todoNameRef.current.value = ''
 
