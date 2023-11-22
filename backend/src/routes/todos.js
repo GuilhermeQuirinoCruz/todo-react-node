@@ -14,13 +14,8 @@ router.route('/')
         const todos = snapshot.docs.map(todo => {
           const todoData = todo.data();
           todoData.id = todo.id;
+          
           return todoData;
-          // return {
-          //   "id": todo.id,
-          //   "dueDate": todoData.dueDate,
-          //   "name": todoData.name,
-          //   "status": todoData.status,
-          // };
         });
 
         console.log(todos);
