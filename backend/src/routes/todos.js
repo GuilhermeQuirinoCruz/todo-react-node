@@ -12,8 +12,18 @@ router.route('/')
       .get()
       .then((snapshot) => {
         const todos = snapshot.docs.map(todo => {
-          return todo.data();
+          const todoData = todo.data();
+          todoData.id = todo.id;
+          return todoData;
+          // return {
+          //   "id": todo.id,
+          //   "dueDate": todoData.dueDate,
+          //   "name": todoData.name,
+          //   "status": todoData.status,
+          // };
         });
+
+        console.log(todos);
 
         res.json({todos});
       })
@@ -35,6 +45,7 @@ router.route('/')
         "status": "In Progress"
       })
       .then((todo) => {
+        console.log(`todo created with id ${todo.id}`);
         res.json({'id' : todo.id});
       })
       .catch((error) => {
@@ -69,6 +80,7 @@ router.route('/:id')
       .set({
         "name": data.name,
         "dueDate": data.dueDate,
+        "status": data.status
       })
       .then(() => {
         res.json({'id' : req.params.id});
