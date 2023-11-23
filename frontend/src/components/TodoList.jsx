@@ -2,20 +2,29 @@ import React from 'react'
 import TodoCard from './TodoCard';
 import './TodoList.css'
 
-function TodoList({ todos, status }) {
+function TodoList({ todos, status, buttons, updateTodo }) {
   return (
     <div className='todo-list'>
       <div className="todo-list-status">
         {status}
       </div>
       {todos.length > 0 ? (
-          todos.map((todo) => {
+        todos.map((todo) => {
           return (
-            <TodoCard name={todo.name} dueDate={todo.dueDate} status={todo.status} key={todo.id}></TodoCard>
+            <TodoCard
+              key={todo.id}
+              id={todo.id}
+              name={todo.name}
+              dueDate={todo.dueDate}
+              status={todo.status}
+              buttonLeft={buttons[0]}
+              buttonRight={buttons[1]}
+              updateTodo={updateTodo}>
+            </TodoCard>
           );
         })) : (
-          <p className='p-empty'><i>Empty</i></p>
-        )}
+        <p className='p-empty'><i>Empty</i></p>
+      )}
     </div>
   )
 }

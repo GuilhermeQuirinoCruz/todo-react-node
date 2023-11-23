@@ -23,7 +23,7 @@ function App() {
 
   async function fetchTodos() {
     console.log('fetching todos...');
-    
+
     axios
       .get('http://localhost:3000/todos')
       .then((response) => {
@@ -60,7 +60,7 @@ function App() {
       name: todoNameRef.current.value,
       dueDate: todoDueDateRef.current.value
     }
-    
+
     axios
       .post('http://localhost:3000/todos', todo)
       .then((response) => {
@@ -75,13 +75,26 @@ function App() {
       });
   }
 
+  async function updateTodo(id, todo) {
+    axios
+      .put("http://localhost:3000/todos/" + id, todo)
+      .then((response) => {
+        console.log(`todo with id ${response.id} updated successfully`);
+
+        fetchTodos();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   return (
     <>
       <h1>Todo App</h1>
 
       {newTodo ? (
         <div className={'new-todo'}>
-          <input type='button' value='X' onClick={hideNewTodo}/>
+          <input type='button' value='X' onClick={hideNewTodo} />
 
           <div>
             <p>
@@ -95,16 +108,31 @@ function App() {
             </p>
           </div>
 
-          <input type='button' value='Create' onClick={createNewTodo}/>
+          <input type='button' value='Create' onClick={createNewTodo} />
         </div>
       ) : (
-        <input type='button' value='NEW +' onClick={showNewTodo} className='btn-show-new-todo'/>
+        <input type='button' value='NEW +' onClick={showNewTodo} className='btn-show-new-todo' />
       )}
 
       <div className='todo-list-container'>
-        <TodoList todos={todosOnHold} status='On Hold'></TodoList>
-        <TodoList todos={todosInProgress} status='In Progress'></TodoList>
-        <TodoList todos={todosCompleted} status='Completed'></TodoList>
+        <TodoList
+          todos={todosOnHold}
+          status='On Hold'
+          buttons={[false, true]}
+          updateTodo={updateTodo}>
+        </TodoList>
+        <TodoList
+          todos={todosInProgress}
+          status='In Progress'
+          buttons={[true, true]}
+          updateTodo={updateTodo}>
+        </TodoList>
+        <TodoList
+          todos={todosCompleted}
+          status='Completed'
+          buttons={[true, false]}
+          updateTodo={updateTodo}>
+        </TodoList>
       </div>
     </>
   )

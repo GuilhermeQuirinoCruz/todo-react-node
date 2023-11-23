@@ -1,7 +1,13 @@
 .todo-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 1.25em;
+}
+
+.todo-card-data {
     padding: 1.25em;
-    background-color: white;
-    border-radius: 15px;
+    border-radius: 5px;
     max-height: 250px;
     display: flex;
     flex-direction: column;
@@ -9,7 +15,15 @@
     align-items: center;
     color: #2a2a2a;
     padding: 5px;
-    margin: 5px;
+}
+
+.todo-card-button-show {
+    font-size: medium;
+}
+
+.todo-card-button-hide {
+    font-size: medium;
+    visibility: hidden;
 }
 
 .todo-card p {

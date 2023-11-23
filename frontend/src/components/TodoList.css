@@ -1,17 +1,19 @@
 .todo-list {
-    flex-grow: 1;
+    flex: 1;
     background-color: #2a2a2a;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
     height: fit-content;
-    border-radius: 15px;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .todo-list-status {
     font-size: 25px;
+    font-weight: 600;
     color: white;
-    padding-top: 10px;
+    padding: 10px 0;
 }
 
 .p-empty {
